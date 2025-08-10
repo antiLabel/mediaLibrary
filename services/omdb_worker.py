@@ -1,0 +1,28 @@
+import os
+import requests
+from PySide6.QtCore import QThread, Signal
+
+class OMDbWorker(QThread):
+    fetched = Signal(dict)
+
+    def __init__(self, title: str):
+        super().__init__()
+        self.title = title
+        self.api_key = os.getenv('OMDB_API_KEY', '')
+
+    def run(self):
+        if not self.api_key:
+            return
+        url = 'http://www.omdbapi.com/'
+        params = {'t': self.title, 'apikey': self.api_key, 'plot': 'short'}
+        try:
+            response = requests.get(url, params=params, timeout=10)
+            if response.status_code == 200:
+                data = response.json()
+                info = {
+                    'poster_url': data.get('Poster', ''),
+                    'plot': data.get('Plot', '')
+                }
+                self.fetched.emit(info)
+        except Exception:
+            pass

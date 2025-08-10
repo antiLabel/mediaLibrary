@@ -1,0 +1,11 @@
+Include
+Lib
+Scripts
+*.cfg
+*.log
+*.tmp
+*.bak
+*.swp
+*.pyc
+__pycache__/
+env/
