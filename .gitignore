@@ -9,3 +9,5 @@ Scripts
 *.pyc
 __pycache__/
 env/
+.env
+icons

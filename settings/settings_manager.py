@@ -10,11 +10,11 @@ class SettingsManager:
     def value(self, key: str, default=None):
         return self._settings.value(key, default)
 
-    def setValue(self, key: str, value):
+    def set_value(self, key: str, value):
         self._settings.setValue(key, value)
 
     def get_last_path(self) -> str:
         return self.value('file/last_path', '')
 
     def set_last_path(self, path: str):
-        self.setValue('file/last_path', path)
+        self.set_value('file/last_path', path)
